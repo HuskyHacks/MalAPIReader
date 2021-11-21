@@ -2,3 +2,4 @@ pefile
 bs4
 requests
 argparse
+colorama
