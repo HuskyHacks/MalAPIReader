@@ -2,15 +2,20 @@
 Reads and prints information from the website [MalAPI.io](https://malapi.io/)
 
 ``` 
+usage: MalAPIReader.py [-h] [--pe PE] [--look LOOK] [--verbose]
+
+Read information from MalAPI.io for WinAPI information.
+
 optional arguments:
-  z -h, --help            show this help message and exit
-  --pe PE, -p PE        Specify a PE to read. The WinAPI will be checked
-                        against MalAPI and information will be printed about
-                        the API if the information is present.
+  -h, --help            show this help message and exit
+  --pe PE, -p PE        Specify a PE to read. The WinAPI will be checked against MalAPI and information will be printed about the API if the information is
+                        present.
   --look LOOK, -l LOOK  Look up an API by name and print all information.
+  --verbose, -v         Increase verbosity of output
+
 ```
   
-  The --look option takes one argument: the name of an API. It will then make a request for the basic details about the API from MalAPI.io and print it. In the example below, we pass "CreateRemoteThread" as an argument and receive information back.
+  The `--look` option takes one argument: the name of an API. It will then make a request for the basic details about the API from MalAPI.io and print it. In the example below, we pass "CreateRemoteThread" as an argument and receive information back.
   
   ![Screenshot 2021-11-02 050332](https://user-images.githubusercontent.com/77356206/139817458-940378a8-d06a-433a-80f3-abfbfbd9400c.png)
 

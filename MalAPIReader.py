@@ -33,7 +33,7 @@ def check_api(api):
     details = APISoup.select('.detail-container .content')
     ApiInfo = details[1].getText().lstrip().rstrip()
     if ApiInfo != "":
-        print(important + api)
+        print(important + "Hit: " + api)
         sus_api[api] = ApiInfo
         return sus_api
     else:
@@ -41,15 +41,16 @@ def check_api(api):
 
 
 def api_lookup():
-    # Lookpup an individual API by name
-    global mal_apis
+    mal_apis = {}
+    # Lookup an individual API by name
     if (args.look):
-        check_api(args.look)
+        lookup = check_api(args.look)
+        mal_apis.update(lookup)
+
     # Read read import table from PE and print information when it is found.
     elif (args.pe):
         pe = pefile.PE(args.pe, fast_load=True)
         pe.parse_data_directories()
-        mal_apis = {}
         try:
             for entry in pe.DIRECTORY_ENTRY_IMPORT:
                 if args.verbose:
@@ -65,16 +66,17 @@ def api_lookup():
     return mal_apis
 
 
-def print_results(mal_apis):
+def print_results(mal_results):
     print("")
     print("-" * 15 + "RESULTS" + "-" * 15)
     print("")
 
     print(info + "Time: " + str(current_time))
-    print(info + "Sample: " + args.pe + "\n")
+    if args.pe:
+        print(info + "Sample: " + args.pe + "\n")
 
-    for x in mal_apis.keys():
-        print(important + str(x) + "\n    \\\\---> " + str(mal_apis[x]))
+    for x in mal_results.keys():
+        print(important + str(x) + "\n    \\\\---> " + str(mal_results[x]))
 
     print("\n\nIf a WINAPI listed here was used maliciously, but no description was given, consider contributing "
           "information to https://malapi.io.")
