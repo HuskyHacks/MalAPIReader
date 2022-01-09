@@ -5,7 +5,7 @@ import argparse
 import sys
 import os
 from utils.colors import *
-import datetime
+from datetime import datetime
 
 parser = argparse.ArgumentParser(description="Read information from MalAPI.io for WinAPI information.")
 parser.add_argument("--pe", "-p",
@@ -13,14 +13,30 @@ parser.add_argument("--pe", "-p",
                          "printed about the API if the information is present.")
 parser.add_argument("--look", "-l", help="Look up an API by name and print all information.")
 parser.add_argument("--verbose", "-v", help="Increase verbosity of output", action="store_true")
+parser.add_argument("--report", "-r", help="Write report to the reports directory", action="store_true")
+
 args = parser.parse_args()
 if len(sys.argv) == 1:
     parser.print_help()
     parser.exit()
 
 # Globals
-current_time = datetime.datetime.now()
+current_time = datetime.now()
 
+if args.report:
+    class Logger(object):
+        def __init__(self):
+            self.terminal = sys.stdout
+            self.log = open("reports/" + str(datetime.now().strftime("%Y-%m-%d-%H-%M")) + "_report.log", "a")
+
+        def write(self, message):
+            self.terminal.write(message)
+            self.log.write(message)
+
+        def flush(self):
+            pass
+
+    sys.stdout = Logger()
 
 def check_api(api):
     sus_api = {}
@@ -33,7 +49,10 @@ def check_api(api):
     details = APISoup.select('.detail-container .content')
     ApiInfo = details[1].getText().lstrip().rstrip()
     if ApiInfo != "":
-        print(important + "Hit: " + api)
+        if args.verbose:
+            print(important + "Hit: " + api)
+        else:
+            print("Hit: " + api)
         sus_api[api] = ApiInfo
         return sus_api
     else:
@@ -59,9 +78,11 @@ def api_lookup():
                     try:
                         imp_name = imp.name.decode("utf-8").strip()
                         if "W" in imp_name:
-                            print("[*] Unicode API detected: " + imp_name)
+                            if args.verbose:
+                                print("[*] Unicode API detected: " + imp_name)
                             ansi_imp = (imp_name[:-1] + "A")
-                            print("[*] Checking ANSI variant: {}".format(ansi_imp))
+                            if args.verbose:
+                                print("[*] Checking ANSI variant: {}".format(ansi_imp))
                             ansi_mal = check_api(ansi_imp)
                             mal_apis.update(ansi_mal)
                         malicious = check_api(imp_name)
@@ -74,25 +95,29 @@ def api_lookup():
 
 
 def print_results(mal_results):
-    print("")
-    print("-" * 15 + "RESULTS" + "-" * 15)
-    print("")
+    if args.verbose:
+        print("")
+        print("-" * 15 + "RESULTS" + "-" * 15)
+        print("")
 
-    print(info + "Time: " + str(current_time))
+        print("Time: " + str(current_time))
     if args.pe:
-        print(info + "Sample: " + args.pe + "\n")
+        print("Sample: " + args.pe + "\n")
 
     for x in mal_results.keys():
-        print(important + str(x) + "\n    \\\\---> " + str(mal_results[x]))
+        print(str(x) + "\n    \\\\---> " + str(mal_results[x]))
 
     print("\n\nIf a WINAPI listed here was used maliciously, but no description was given, consider contributing "
-          "information to https://malapi.io.")
+          "information to https://malapi.io.\n Thank you for using MalAPI!\n Squiblydoo | HuskyHacks")
 
 
 def main():
+    print("-" * 15 + "MalAPI.py" + "-" * 15)
+    if args.verbose:
+        print(info + "Current time: {}".format(current_time))
+        print(info + "Sample name: {}".format(args.pe))
     mal_api_results = api_lookup()
     print_results(mal_api_results)
-
 
 if __name__ == "__main__":
     main()
