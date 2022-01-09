@@ -1,4 +1,4 @@
-# MalAPIReader
+r# MalAPIReader
 Parses API entries and prints information from the website [MalAPI.io](https://malapi.io/)
 
 ## Setup
@@ -36,7 +36,7 @@ optional arguments:
   --report, -r          Write report to the reports directory
 ```
   
-  The `--look` option takes one argument: the name of an API. It will then make a request for the basic details about the API from MalAPI.io and print it. In the example below, we pass "CreateRemoteThread" as an argument and receive information back.
+  The `--look` option takes one argument: the name of an API. It will then make a request for the basic details about the API from MalAPI.io and print it. In the example below, we pass "ShellExecuteA" as an argument and receive information back.
 
 i.e.
 
