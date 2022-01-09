@@ -38,10 +38,21 @@ optional arguments:
   
   The `--look` option takes one argument: the name of an API. It will then make a request for the basic details about the API from MalAPI.io and print it. In the example below, we pass "CreateRemoteThread" as an argument and receive information back.
 
+i.e.
+![image](https://user-images.githubusercontent.com/57866415/148666662-eb041406-cac1-4be5-a9e6-8c2d60ad48d3.png)
+
+
   The `--pe` option takes one argument: the path and name to an PE file. It will then read the Import Address Table and check for any entries on MalAPI.io. If an entry is found, information about the API is then printed.
+
+i.e.
+![image](https://user-images.githubusercontent.com/57866415/148666678-c77f549f-c74c-443f-b850-d0cab4c2b7d8.png)
+
+The `-r` option writes the console out to a date-time stamped logfile in `reports/` for later retrieval.
 
 ## Known Bug
 Keyboard Interrupts are not reliable. I am able to interrupt when running from IDLE but not when running from cmd.exe
+
+The `--report` arg and the `--verbose` arg create strange log entries due to the use of colorama. All of the data is in there but the colors render as unprintable chars.
 
 ## Thanks
 Thank you mr.d0x for the inspiring project.
