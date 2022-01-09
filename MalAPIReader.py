@@ -3,7 +3,6 @@ import requests
 import bs4
 import argparse
 import sys
-import os
 from utils.colors import *
 from datetime import datetime
 
@@ -36,7 +35,9 @@ if args.report:
         def flush(self):
             pass
 
+
     sys.stdout = Logger()
+
 
 def check_api(api):
     sus_api = {}
@@ -129,6 +130,7 @@ def main():
         print(info + "Sample name: {}".format(args.pe))
     mal_api_results = api_lookup()
     print_results(mal_api_results)
+
 
 if __name__ == "__main__":
     main()
