@@ -108,11 +108,11 @@ def print_results(mal_results):
         print(str(x) + "\n    \\\\---> " + str(mal_results[x]))
 
     print("\n\nIf a WINAPI listed here was used maliciously, but no description was given, consider contributing "
-          "information to https://malapi.io.\n Thank you for using MalAPI!\n Squiblydoo | HuskyHacks")
+          "information to https://malapi.io.\n Thank you for using MalAPIReader!\n Squiblydoo | HuskyHacks")
 
 
 def main():
-    print("-" * 15 + "MalAPI.py" + "-" * 15)
+    print("-" * 15 + "MalAPIReader.py" + "-" * 15)
     if args.verbose:
         print(info + "Current time: {}".format(current_time))
         print(info + "Sample name: {}".format(args.pe))
