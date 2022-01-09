@@ -80,7 +80,7 @@ def api_lookup():
                 for imp in entry.imports:
                     try:
                         imp_name = imp.name.decode("utf-8").strip()
-                        if "W" in imp_name:
+                        if imp_name.endswith("W"):
                             if args.verbose:
                                 print("[*] Unicode API detected: " + imp_name)
                             ansi_imp = (imp_name[:-1] + "A")
@@ -88,6 +88,14 @@ def api_lookup():
                                 print("[*] Checking ANSI variant: {}".format(ansi_imp))
                             ansi_mal = check_api(ansi_imp)
                             mal_apis.update(ansi_mal)
+                        if imp_name.endswith("A"):
+                            if args.verbose:
+                                print("[*] ANSI API detected: " + imp_name)
+                            unicode_imp = (imp_name[:-1] + "W")
+                            if args.verbose:
+                                print("[*] Checking Unicode variant: {}".format(unicode_imp))
+                            unicode_mal = check_api(unicode_imp)
+                            mal_apis.update(unicode_mal)
                         malicious = check_api(imp_name)
                         mal_apis.update(malicious)
                     except:
