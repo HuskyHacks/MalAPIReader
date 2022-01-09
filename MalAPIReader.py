@@ -63,9 +63,12 @@ def api_lookup():
     mal_apis = {}
     # Lookup an individual API by name
     if (args.look):
-        lookup = check_api(args.look)
-        mal_apis.update(lookup)
-
+        try:
+            lookup = check_api(args.look)
+            mal_apis.update(lookup)
+        except Exception as e:
+            print("No result")
+            quit()
     # Read read import table from PE and print information when it is found.
     elif (args.pe):
         pe = pefile.PE(args.pe, fast_load=True)

@@ -2,16 +2,17 @@
 Reads and prints information from the website [MalAPI.io](https://malapi.io/)
 
 ``` 
-usage: MalAPIReader.py [-h] [--pe PE] [--look LOOK] [--verbose]
+usage: MalAPIReader.py [-h] [--pe PE] [--look LOOK] [--verbose] [--report]
 
 Read information from MalAPI.io for WinAPI information.
 
 optional arguments:
   -h, --help            show this help message and exit
-  --pe PE, -p PE        Specify a PE to read. The WinAPI will be checked against MalAPI and information will be printed about the API if the information is
-                        present.
+  --pe PE, -p PE        Specify a PE to read. The WinAPI will be checked against MalAPI and information will be printed about the API if the information is present.
   --look LOOK, -l LOOK  Look up an API by name and print all information.
   --verbose, -v         Increase verbosity of output
+  --report, -r          Write report to the reports directory
+
 
 ```
   
@@ -29,8 +30,6 @@ optional arguments:
   
 # Known Bug
 Keyboard Interrupts are not reliable. I am able to interrupt when running from IDLE but not when running from cmd.exe
-
-The script does not yet account for difference between Unicdoe and ANSI versions of API. That functionality will need to be implemented later. At this time, it will fail to find the API in the table if the API in the IAT does not match the MalAPI version exactly.
 
 # Thanks
 Thank you mr.d0x for the inspiring project.
