@@ -45,7 +45,9 @@ i.e.
   The `--pe` option takes one argument: the path and name to an PE file. It will then read the Import Address Table and check for any entries on MalAPI.io. If an entry is found, information about the API is then printed.
 
 i.e.
-![image](https://user-images.githubusercontent.com/57866415/148666678-c77f549f-c74c-443f-b850-d0cab4c2b7d8.png)
+![image](https://user-images.githubusercontent.com/57866415/148666776-c9ff5d00-3c78-4360-a82a-a72986507e7e.png)
+![image](https://user-images.githubusercontent.com/57866415/148666780-a0d254c5-49e0-4846-94ab-e585fd17ce09.png)
+
 
 The `-r` option writes the console out to a date-time stamped logfile in `reports/` for later retrieval.
 
