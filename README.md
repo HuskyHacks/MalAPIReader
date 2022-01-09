@@ -1,4 +1,4 @@
-r# MalAPIReader
+# MalAPIReader
 Parses API entries and prints information from the website [MalAPI.io](https://malapi.io/)
 
 ## Setup
