@@ -1,6 +1,28 @@
 # MalAPIReader
-Reads and prints information from the website [MalAPI.io](https://malapi.io/)
+Parses API entries and prints information from the website [MalAPI.io](https://malapi.io/)
 
+## Setup
+Clone the repo:
+```
+$ git clone https://github.com/HuskyHacks/MalAPIReader.git && cd MalAPIReader
+```
+Install Poetry:
+```
+$ pip3 install poetry
+```
+Enter Poetry shell:
+```
+$ poetry shell
+```
+Install dependencies:
+```
+$ poetry install
+```
+Run the script:
+```
+$ python3 MalAPIReader.py -h
+```
+## Usage
 ``` 
 usage: MalAPIReader.py [-h] [--pe PE] [--look LOOK] [--verbose] [--report]
 
@@ -12,24 +34,14 @@ optional arguments:
   --look LOOK, -l LOOK  Look up an API by name and print all information.
   --verbose, -v         Increase verbosity of output
   --report, -r          Write report to the reports directory
-
-
 ```
   
   The `--look` option takes one argument: the name of an API. It will then make a request for the basic details about the API from MalAPI.io and print it. In the example below, we pass "CreateRemoteThread" as an argument and receive information back.
-  
-  ![Screenshot 2021-11-02 050332](https://user-images.githubusercontent.com/77356206/139817458-940378a8-d06a-433a-80f3-abfbfbd9400c.png)
 
-  
-  The --pe option takes one argument: the path and name to an PE file. It will then read the Import Address Table and check for any entries on MalAPI.io. If an entry is found, information about the API is then printed.
-  
-  For example, in the below image, OpenProcessToken was found and information was printed.
-  
-  ![image](https://user-images.githubusercontent.com/77356206/139821165-75f5c780-f328-413b-9a4a-481bfeb3ce02.png)
+  The `--pe` option takes one argument: the path and name to an PE file. It will then read the Import Address Table and check for any entries on MalAPI.io. If an entry is found, information about the API is then printed.
 
-  
-# Known Bug
+## Known Bug
 Keyboard Interrupts are not reliable. I am able to interrupt when running from IDLE but not when running from cmd.exe
 
-# Thanks
+## Thanks
 Thank you mr.d0x for the inspiring project.
