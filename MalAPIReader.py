@@ -63,7 +63,7 @@ def check_api(api):
 def api_lookup():
     mal_apis = {}
     # Lookup an individual API by name
-    if (args.look):
+    if args.look:
         try:
             lookup = check_api(args.look)
             mal_apis.update(lookup)
@@ -72,7 +72,7 @@ def api_lookup():
             print(printError + "Full error: {}".format(str(e)))
             quit()
     # Read read import table from PE and print information when it is found.
-    elif (args.pe):
+    elif args.pe:
         try:
             pe = pefile.PE(args.pe, fast_load=True)
         except Exception as e:
@@ -87,6 +87,8 @@ def api_lookup():
                 for imp in entry.imports:
                     try:
                         imp_name = imp.name.decode("utf-8").strip()
+
+                        # There's, like, probably a better way to do this but ¯\_(ツ)_/¯
                         if imp_name.endswith("W"):
                             if args.verbose:
                                 print("[*] Unicode API detected: " + imp_name)
