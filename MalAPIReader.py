@@ -69,6 +69,7 @@ def api_lookup():
             mal_apis.update(lookup)
         except Exception as e:
             print(printError + "No result")
+            print(printError + "Full error: {}".format(str(e)))
             quit()
     # Read read import table from PE and print information when it is found.
     elif (args.pe):
