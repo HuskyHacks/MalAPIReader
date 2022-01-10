@@ -72,7 +72,12 @@ def api_lookup():
             quit()
     # Read read import table from PE and print information when it is found.
     elif (args.pe):
-        pe = pefile.PE(args.pe, fast_load=True)
+        try:
+            pe = pefile.PE(args.pe, fast_load=True)
+        except Exception as e:
+            print(printError + "Unable to parse file. May not be a PE.")
+            print(printError + "Full error: {}".format(str(e)))
+            quit()
         pe.parse_data_directories()
         try:
             for entry in pe.DIRECTORY_ENTRY_IMPORT:
